@@ -16,7 +16,6 @@ const balloonColors = ['#B79DFF', '#FFB7D5', '#9ED8FF', '#FFD98A'];
 
 function generateRandomBalloon(fromLeft: boolean): Balloon {
   // Determine if balloon comes from left or right side
-  const side = fromLeft ? -1 : 1;
   const startX = fromLeft ? Math.random() * -20 : window.innerWidth + Math.random() * 20;
 
   return {

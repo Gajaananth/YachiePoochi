@@ -85,7 +85,7 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
             ))}
           </Reorder.Group>
         ) : (
-          {/* Solved state with enhanced presentation */}
+          // Solved state with enhanced presentation
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -115,7 +115,7 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
             />
           </motion.div>
         )}
-      </div>
+      </motion.div>
 
       {/* Action Button with enhanced styling */}
       <motion.div

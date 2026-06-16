@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tailwindcss/utilities";
 
 @theme {
   /* Primary Color Palette */
@@ -267,13 +268,18 @@ body {
   box-shadow: 0 0 20px rgba(255, 217, 138, 0.3);
 }
 
-/* Glass Card Specific Styles */
+/* Glass Card Specific Styles - Using explicit properties instead of @apply */
 .glass-card {
-  @apply glass rounded-2xl border;
+  background: var(--color-glass-background);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 1rem; /* rounded-2xl */
+  box-shadow: 0 8px 32px var(--color-glass-shadow);
 }
 
 .glass-card:hover {
-  @apply shadow-glow-purple/20;
+  box-shadow: 0 0 20px rgba(183, 157, 255, 0.3);
 }
 
 /* Responsive Container */

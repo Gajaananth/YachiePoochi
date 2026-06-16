@@ -56,7 +56,9 @@ export default function App() {
       {/* Premium Global Components */}
       <FloatingBalloons />
       {/* Animated background that changes subtly */}
-      <AnimatedBackground variant="moving-glow" className="opacity-30" />
+      <div className="opacity-30">
+        <AnimatedBackground variant="moving-glow" />
+      </div>
 
       <AnimatePresence mode="wait">
         <motion.div

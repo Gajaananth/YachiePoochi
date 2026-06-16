@@ -66,18 +66,16 @@ export default function Screen9Achievements({ onContinue }: Props) {
               </div>
             </div>
 
-            {/* Hover Effect Glass Shine */}
+            {/* Simple Hover Effect */}
             <motion.div
               initial={{ opacity: 0 }}
-              whileHover={{ opacity: 0.3 }}
+              whileHover={{ opacity: 0.2 }}
               className="absolute inset-0 rounded-2xl md:rounded-3xl pointer-events-none"
               style={{
-                background: 'linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent)',
-                transform: 'translateX(-100%)',
-              }}
-              transition={{
-                opacity: 0.3,
-                x: ['-100%', '100%', '100%'],
+                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                backgroundSize: '200% 100%',
+                backgroundPosition: '-100% 0',
+                transition: 'background-position 0.5s ease'
               }}
             />
           </motion.div>
