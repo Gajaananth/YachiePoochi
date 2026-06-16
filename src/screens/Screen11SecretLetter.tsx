@@ -8,19 +8,30 @@ interface Props {
 const letterLines = [
   "Dear Yachie,",
   "",
-  "I couldn't just give you a normal birthday card.",
-  "You deserve something as unique and dramatic as you are.",
+  "I didn't want to give you an ordinary birthday message.",
+  "So I created something a little different, just for you.",
   "",
-  "Thank you for being the amazing sister you are.",
-  "From stealing my snacks to taking 100 selfies on my phone...",
-  "I wouldn't trade any of it.",
+  "On your special day, I simply want to wish you happiness,",
+  "good health, success, and peace in everything you do.",
   "",
-  "I hope this year brings you endless happiness, success,",
-  "and a few less arguments (that you always win anyway).",
+  "You have always carried kindness within you,",
+  "even during difficult moments.",
   "",
-  "Happy Birthday!",
+  "As time passes, I hope you continue growing stronger,",
+  "believing in yourself more, and never losing that beautiful",
+  "smile that makes you who you are.",
   "",
-  "Love always."
+  "May this new year of your life bring wonderful opportunities,",
+  "meaningful memories, and reasons to be proud of yourself.",
+  "",
+  "And most importantly...",
+  "Please try not to collect any more serupadis this year.",
+  "",
+  "Stay strong.",
+  "Keep smiling.",
+  "Keep moving forward.",
+  "",
+  "Happy Birthday, Yachie."
 ];
 
 export default function Screen11SecretLetter({ onContinue }: Props) {
@@ -39,50 +50,79 @@ export default function Screen11SecretLetter({ onContinue }: Props) {
     if (visibleChars < line.length) {
       const timer = setTimeout(() => {
         setVisibleChars(prev => prev + 1);
-      }, 50); // Typing speed
+      }, 40);
       return () => clearTimeout(timer);
     } else {
       const timer = setTimeout(() => {
         setCurrentLine(prev => prev + 1);
         setVisibleChars(0);
-      }, line === "" ? 400 : 800); // Pause at end of line
+      }, line === "" ? 300 : 600);
       return () => clearTimeout(timer);
     }
   }, [currentLine, visibleChars]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-black relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-800 via-black to-black opacity-50" />
-      
-      <div className="z-10 w-full max-w-2xl font-serif text-gray-300 text-lg md:text-2xl leading-relaxed">
-        {letterLines.slice(0, currentLine).map((line, idx) => (
-          <p key={idx} className="min-h-[1.5em]">{line}</p>
-        ))}
-        {currentLine < letterLines.length && (
-          <p className="min-h-[1.5em]">
-            {letterLines[currentLine].substring(0, visibleChars)}
-            <motion.span 
-              animate={{ opacity: [1, 0] }} 
-              transition={{ repeat: Infinity, duration: 0.8 }}
-            >
-              |
-            </motion.span>
-          </p>
-        )}
-      </div>
+    <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 relative overflow-hidden">
+      {/* Premium Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A] via-[#0A0E1A] to-[#050811]" />
 
-      <motion.div 
+      {/* Letter Container */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative z-10 w-full max-w-2xl rounded-2xl md:rounded-3xl overflow-hidden"
+        style={{
+          background: 'rgba(255, 255, 255, 0.05)',
+          border: '1px solid rgba(255, 255, 255, 0.15)',
+          backdropFilter: 'blur(20px)',
+        }}
+      >
+        <div className="p-6 sm:p-8 md:p-10 lg:p-12 min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center">
+          {/* Letter Text */}
+          <div className="font-light text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed md:leading-8">
+            {letterLines.slice(0, currentLine).map((line, idx) => (
+              <p key={idx} className="min-h-[1.5em] md:min-h-[2em] mb-2 md:mb-3">
+                {line}
+              </p>
+            ))}
+            {currentLine < letterLines.length && (
+              <p className="min-h-[1.5em] md:min-h-[2em]">
+                {letterLines[currentLine].substring(0, visibleChars)}
+                <motion.span
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ repeat: Infinity, duration: 0.8 }}
+                  className="text-[#B79DFF]"
+                >
+                  |
+                </motion.span>
+              </p>
+            )}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Continue Button */}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: finished ? 1 : 0 }}
-        className="z-10 mt-16"
+        transition={{ delay: finished ? 0.5 : 0 }}
+        className="mt-8 md:mt-12 z-10"
       >
-        <button
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
           onClick={onContinue}
           disabled={!finished}
-          className="px-8 py-3 border border-white/30 rounded-full hover:bg-white hover:text-black transition-colors"
+          className="px-8 sm:px-10 md:px-12 py-3 sm:py-4 md:py-5 rounded-full font-semibold text-white text-sm sm:text-base md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{
+            background: finished ? 'rgba(183, 157, 255, 0.4)' : 'rgba(183, 157, 255, 0.2)',
+            border: '2px solid rgba(183, 157, 255, 0.4)',
+            backdropFilter: 'blur(20px)',
+            boxShadow: finished ? '0 0 20px rgba(183, 157, 255, 0.3)' : 'none',
+          }}
         >
           Open the Vault
-        </button>
+        </motion.button>
       </motion.div>
     </div>
   );

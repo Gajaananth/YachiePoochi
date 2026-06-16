@@ -12,16 +12,9 @@ export default function Screen8CatchCake({ onCaught }: Props) {
   const [message, setMessage] = useState('');
 
   const messages = [
-    "Stop!",
-    "Why are you chasing me?",
-    "I'm innocent.",
-    "This is cake abuse.",
-    "I regret existing.",
-    "Ouch!",
-    "Please spare me!",
-    "I'm just a cake!",
-    "Why Yachie, why?",
-    "Almost dead..."
+    "Got me!",
+    "Here we go again!",
+    "Almost done!"
   ];
 
   const moveCake = () => {
@@ -41,7 +34,7 @@ export default function Screen8CatchCake({ onCaught }: Props) {
     setHits(newHits);
     setMessage(messages[Math.min(newHits - 1, messages.length - 1)]);
     
-    if (newHits >= 10) {
+    if (newHits >= 3) {
       confetti({
         particleCount: 200,
         spread: 160,
@@ -53,7 +46,7 @@ export default function Screen8CatchCake({ onCaught }: Props) {
     }
   };
 
-  if (hits >= 10) {
+  if (hits >= 3) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center p-4">
         <motion.h2 
@@ -61,30 +54,62 @@ export default function Screen8CatchCake({ onCaught }: Props) {
           animate={{ scale: 1 }}
           className="text-4xl md:text-6xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500"
         >
-          CAKE DESTROYED!
+          CAKE CAUGHT! 🎉
         </motion.h2>
       </div>
     );
   }
 
   return (
-    <div className="w-full h-full relative overflow-hidden p-4">
-      <div className="absolute top-10 left-0 w-full text-center pointer-events-none">
-        <h2 className="text-2xl font-bold text-white mb-2">Catch the Escaping Cake</h2>
-        <p className="text-pink-400">Hits: {hits} / 10</p>
-        <p className="text-xl mt-4 text-red-300 font-bold">{message}</p>
+    <div className="w-full h-full relative overflow-hidden p-4 md:p-6 flex flex-col items-center justify-center">
+      {/* Header Section */}
+      <div className="absolute top-6 md:top-10 left-0 w-full text-center pointer-events-none z-10">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2 md:mb-3">Catch the Cake!</h2>
+        <div className="flex justify-center gap-4 md:gap-6 text-sm md:text-base">
+          <p className="text-[#FFB7D5]">Taps: <span className="font-bold text-lg md:text-xl text-[#FFD98A]">{hits}</span> / 3</p>
+        </div>
+        {message && (
+          <motion.p
+            key={message}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="text-lg md:text-2xl mt-3 md:mt-4 text-[#9ED8FF] font-semibold"
+          >
+            {message}
+          </motion.p>
+        )}
       </div>
 
+      {/* Cake - Larger on Mobile */}
       <motion.div
         animate={{ left: `${position.x}%`, top: `${position.y}%` }}
         transition={{ type: 'spring', stiffness: 100, damping: 20 }}
         onClick={handleHit}
         onTouchStart={handleHit}
-        className="absolute w-20 h-20 -ml-10 -mt-10 text-6xl cursor-pointer select-none active:scale-75 transition-transform"
+        className="absolute -ml-10 md:-ml-12 -mt-10 md:-mt-12 text-5xl md:text-7xl cursor-pointer select-none active:scale-75 transition-transform"
         style={{ zIndex: 50 }}
       >
         🎂
       </motion.div>
+
+      {/* Completion Message */}
+      {hits >= 3 && (
+        <motion.div
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none"
+        >
+          <div className="text-center">
+            <motion.h2
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFD98A] to-[#FFB7D5]"
+            >
+              CAKE CAUGHT! 🎉
+            </motion.h2>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }

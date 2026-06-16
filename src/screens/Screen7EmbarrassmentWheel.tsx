@@ -7,12 +7,12 @@ interface Props {
 }
 
 const rewards = [
-  "Funny Photo",
-  "Cringe Memory",
-  "Snack Queen Award",
-  "Drama Queen Award",
-  "Legendary Sister Award",
-  "Main Character Award"
+  "Kind Heart 💖",
+  "Strong Spirit 💪",
+  "Bright Smile ✨",
+  "Courageous Soul 🦋",
+  "Growing Stronger 🌱",
+  "Birthday Star ⭐"
 ];
 
 export default function Screen7EmbarrassmentWheel({ onComplete }: Props) {
@@ -24,6 +24,8 @@ export default function Screen7EmbarrassmentWheel({ onComplete }: Props) {
   const spin = async () => {
     if (spinning || result) return;
     setSpinning(true);
+    setResult(null);
+    setPhoto(null);
     
     // Spin animation
     const targetRotation = 360 * 5 + Math.floor(Math.random() * 360);
@@ -34,8 +36,11 @@ export default function Screen7EmbarrassmentWheel({ onComplete }: Props) {
     });
 
     const index = Math.floor(((targetRotation % 360) / 360) * rewards.length);
-    setResult(rewards[index] || rewards[0]);
-    setPhoto(getRandomPhoto());
+    const selectedReward = rewards[index] || rewards[0];
+    const selectedPhoto = getRandomPhoto();
+    
+    setResult(selectedReward);
+    setPhoto(selectedPhoto);
     setSpinning(false);
   };
 

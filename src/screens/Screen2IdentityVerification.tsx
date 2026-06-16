@@ -37,57 +37,67 @@ export default function Screen2IdentityVerification({ onVerify }: Props) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+    <div className="w-full h-full flex flex-col items-center justify-center p-6 sm:p-8 bg-gradient-to-b from-transparent via-[#0A0E1A] to-[#050811]">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-12"
+        className="text-center mb-8 sm:mb-12"
       >
-        <h2 className="text-3xl md:text-5xl font-bold mb-4">Wait...</h2>
-        <p className="text-xl md:text-2xl text-gray-300">Is it actually your birthday today?</p>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#B79DFF] to-[#FFB7D5]">
+          Wait...
+        </h1>
+        <p className="text-sm md:text-lg text-gray-300 max-w-md">Is it actually your birthday today?</p>
       </motion.div>
 
-      <div className="relative w-full max-w-md h-64 flex items-center justify-center gap-8">
+      <div className="relative w-full max-w-sm h-[200px] sm:h-[250px] flex items-center justify-center gap-6 sm:gap-8">
         <motion.button
           animate={{ x: yesPosition.x, y: yesPosition.y }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
           onMouseEnter={handleHoverOrTouch}
           onClick={() => tired && onVerify()}
           onTouchStart={handleHoverOrTouch}
-          className={`px-8 py-4 rounded-xl font-bold text-xl shadow-lg transition-colors ${tired ? 'bg-green-500 text-white' : 'bg-pink-500 text-white'}`}
-          style={{ zIndex: 10 }}
+          className="btn-glass-primary flex-1 flex sm:flex-none sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] items-center justify-center text-sm sm:text-base font-bold"
+          style={{
+            boxShadow: '0 0 25px rgba(183, 157, 255, 0.3)',
+            border: 'none',
+          }}
         >
           YES
         </motion.button>
 
-        <button
-          onClick={() => {}} // Does absolutely nothing
-          className="px-8 py-4 rounded-xl font-bold text-xl bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors shadow-lg"
+        <motion.button
+          onClick={() => {}}
+          onTouchStart={() => {}}
+          className="btn-glass-outline flex-1 flex sm:flex-none sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] items-center justify-center text-sm sm:text-base font-bold"
+          style={{
+            boxShadow: '0 0 25px rgba(0, 0, 0, 0.2)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+          }}
         >
           NO
-        </button>
+        </motion.button>
       </div>
 
-      <div className="h-16 mt-8 text-center flex flex-col items-center justify-center">
+      <div className="h-16 sm:h-20 mt-6 sm:mt-8 text-center flex flex-col items-center justify-center">
         {escapes > 0 && !tired && (
           <motion.p
             key={escapes}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-pink-400 font-bold text-lg"
+            className="text-pink-400 font-bold text-sm sm:text-lg"
           >
             {taunts[(escapes - 1) % taunts.length]}
           </motion.p>
         )}
-        
+
         {tired && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             className="text-center"
           >
-            <p className="text-2xl font-bold text-yellow-400 mb-2">Okay okay...</p>
-            <p className="text-xl text-gray-300">You win 😭</p>
+            <p className="text-xl sm:text-2xl font-bold text-yellow-400 mb-2">Okay okay...</p>
+            <p className="text-sm md:text-lg text-gray-300">You win 😭</p>
           </motion.div>
         )}
       </div>

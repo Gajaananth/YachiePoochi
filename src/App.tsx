@@ -18,6 +18,8 @@ import Screen14SecretVault from './screens/Screen14SecretVault';
 import Screen15GrandFinale from './screens/Screen15GrandFinale';
 
 import { AudioController } from './components/AudioController';
+import { FloatingBalloons } from './components/FloatingBalloons';
+import { AnimatedBackground } from './components/AnimatedBackground';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState(1);
@@ -48,10 +50,13 @@ export default function App() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-slate-950 text-white relative overflow-hidden">
+    <div className="w-full h-screen bg-gradient-to-br from-[#0F172A] via-[#0A0E1A] to-[#050811] text-white relative overflow-hidden">
       <AudioController />
-      
-      {/* Background Particles / Effects could go here */}
+
+      {/* Premium Global Components */}
+      <FloatingBalloons />
+      {/* Animated background that changes subtly */}
+      <AnimatedBackground variant="moving-glow" className="opacity-30" />
 
       <AnimatePresence mode="wait">
         <motion.div

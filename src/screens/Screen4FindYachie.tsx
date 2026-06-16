@@ -7,11 +7,11 @@ interface Props {
 }
 
 const decoys = [
-  { id: 'cat1', src: 'https://placekitten.com/200/200', type: 'cat' },
-  { id: 'cat2', src: 'https://placekitten.com/201/200', type: 'cat' },
-  { id: 'potato1', src: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Patates.jpg', type: 'potato' },
-  { id: 'potato2', src: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Patates.jpg', type: 'potato' },
-  { id: 'funny1', src: 'https://placekitten.com/202/200', type: 'cat' },
+  { id: 'decoy1', src: new URL('../../find_the_real_Yachie/b15a123cf4c902f0084fad278baad508.jpg', import.meta.url).href, type: 'decoy' },
+  { id: 'decoy2', src: new URL('../../find_the_real_Yachie/images (3).jpg', import.meta.url).href, type: 'decoy' },
+  { id: 'decoy3', src: new URL('../../find_the_real_Yachie/images (4).jpg', import.meta.url).href, type: 'decoy' },
+  { id: 'decoy4', src: new URL('../../find_the_real_Yachie/images (5).jpg', import.meta.url).href, type: 'decoy' },
+  { id: 'decoy5', src: new URL('../../find_the_real_Yachie/images (6).jpg', import.meta.url).href, type: 'decoy' },
 ];
 
 export default function Screen4FindYachie({ onFound }: Props) {

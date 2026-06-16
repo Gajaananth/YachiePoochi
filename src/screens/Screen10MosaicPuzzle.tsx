@@ -26,52 +26,118 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
   }, [pieces]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-blue-400 mb-2">Photo Recovery</h2>
-        <p className="text-gray-300">Drag the pieces to fix this broken memory.</p>
+    <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-6">
+      <div className="text-center mb-8 sm:mb-10">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#B79DFF] via-[#FFB7D5] to-[#9ED8FF]">
+          Photo Recovery
+        </h1>
+        <p className="text-sm md:text-lg text-gray-300 max-w-md">
+          Drag the pieces to fix this broken memory.
+        </p>
       </div>
 
-      <div className="w-full max-w-sm aspect-[3/4] relative rounded-2xl overflow-hidden glass p-2 border border-white/20">
+      {/* Puzzle Container with enhanced glassmorphism */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-sm sm:max-w-md aspect-[3/4] relative rounded-2xl overflow-hidden glass-panel p-3 sm:p-4"
+        style={{
+          border: '1px solid rgba(255, 255, 255, 0.15)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+        }}
+      >
         {!solved ? (
           <Reorder.Group axis="y" values={pieces} onReorder={setPieces} className="w-full h-full flex flex-col">
             {pieces.map((piece) => (
-              <Reorder.Item 
-                key={piece} 
-                value={piece} 
-                className="w-full flex-1 relative cursor-grab active:cursor-grabbing overflow-hidden border-b border-white/10 last:border-0"
+              <Reorder.Item
+                key={piece}
+                value={piece}
+                className="w-full flex-1 relative cursor-grab active:cursor-grabbing overflow-hidden"
               >
-                <img 
-                  src={photo} 
-                  alt="" 
-                  className="absolute w-full h-[300%] object-cover pointer-events-none"
-                  style={{ top: `-${piece * 100}%` }}
-                />
+                {/* Photo piece with enhanced hover effects */}
+                <motion.div
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full h-full relative overflow-hidden"
+                  transition={{ duration: 0.3 }}
+                >
+                  <img
+                    src={photo}
+                    alt=""
+                    className="absolute w-full h-[300%] object-cover pointer-events-none transition-transform duration-500"
+                    style={{ top: `-${piece * 100}%` }}
+                  />
+                  {/* Enhanced border glow on hover */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 0.6 }}
+                    className="absolute inset-0 rounded pointer-events-none"
+                    style={{
+                      border: '2px solid rgba(255, 255, 255, 0.4)',
+                      background: 'linear-gradient(135deg, rgba(183, 157, 255, 0.1), rgba(255, 183, 213, 0.1))',
+                    }}
+                    transition={{ duration: 0.4 }}
+                  />
+                </motion.div>
               </Reorder.Item>
             ))}
           </Reorder.Group>
         ) : (
+          {/* Solved state with enhanced presentation */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-full h-full rounded-xl overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.5)]"
+            transition={{ duration: 0.8, type: 'spring' }}
+            className="w-full h-full rounded-xl overflow-hidden"
+            style={{
+              boxShadow: '0 0 40px rgba(59, 130, 246, 0.5)',
+              border: '2px solid rgba(183, 157, 255, 0.3)',
+            }}
           >
-            <img src={photo} alt="Solved" className="w-full h-full object-cover" />
+            <motion.img
+              src={photo}
+              alt="Solved"
+              className="w-full h-full object-cover"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.6, type: 'spring' }}
+            />
+            {/* Subtle glow effect for solved state */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.3 }}
+              className="absolute inset-0 rounded-xl pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle at center, rgba(183, 157, 255, 0.2) 0%, transparent 70%)',
+              }}
+            />
           </motion.div>
         )}
       </div>
 
-      <motion.div 
-        className="h-16 mt-8 flex items-center justify-center"
-        animate={{ opacity: solved ? 1 : 0 }}
+      {/* Action Button with enhanced styling */}
+      <motion.div
+        className="h-16 sm:h-20 mt-8 sm:mt-10 flex items-center justify-center"
       >
-        <button
+        <motion.button
           onClick={onComplete}
           disabled={!solved}
-          className="px-8 py-3 bg-blue-500 rounded-xl font-bold text-white hover:bg-blue-400 transition-colors"
+          initial={{ opacity: solved ? 1 : 0, y: solved ? 0 : 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: solved ? 0.5 : 0, duration: 0.5 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="btn-glass-primary px-8 sm:px-10 md:px-12 py-3 sm:py-4 md:py-5 rounded-full font-bold text-white text-sm sm:text-base md:text-lg transition-all shadow-lg"
+          style={{
+            boxShadow: solved
+              ? '0 0 30px rgba(183, 157, 255, 0.4)'
+              : '0 0 25px rgba(183, 157, 255, 0.3)',
+          }}
         >
-          Memory Restored
-        </button>
+          {!solved ? 'Keep Trying' : 'Memory Restored'}
+        </motion.button>
       </motion.div>
     </div>
   );
