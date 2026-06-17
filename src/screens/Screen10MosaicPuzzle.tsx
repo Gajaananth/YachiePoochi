@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, Reorder } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { getRandomPhoto } from '../data/photos';
 
 interface Props {
@@ -7,22 +7,34 @@ interface Props {
 }
 
 const pieceLayouts = [
-  { backgroundPosition: 'left top', backgroundSize: '200% 200%', gridColumn: '1', gridRow: '1' },
-  { backgroundPosition: 'right top', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '1' },
-  { backgroundPosition: 'left bottom', backgroundSize: '200% 200%', gridColumn: '1', gridRow: '2' },
-  { backgroundPosition: 'right bottom', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '2' }
+  { backgroundPosition: 'left top', backgroundSize: '200% 200%' },
+  { backgroundPosition: 'right top', backgroundSize: '200% 200%' },
+  { backgroundPosition: 'left bottom', backgroundSize: '200% 200%' },
+  { backgroundPosition: 'right bottom', backgroundSize: '200% 200%' }
 ];
+
+const gridPositions = [
+  { gridColumn: '1', gridRow: '1' },
+  { gridColumn: '2', gridRow: '1' },
+  { gridColumn: '1', gridRow: '2' },
+  { gridColumn: '2', gridRow: '2' }
+];
+
+const createScrambledPieces = () => {
+  const base = [0, 1, 2, 3];
+  let shuffled = [...base].sort(() => Math.random() - 0.5);
+  while (shuffled.every((value, index) => value === index)) {
+    shuffled = [...base].sort(() => Math.random() - 0.5);
+  }
+  return shuffled;
+};
 
 // A 4-piece puzzle split into four equal square quadrants
 export default function Screen10MosaicPuzzle({ onComplete }: Props) {
   const [photo] = useState(() => getRandomPhoto());
-  const [pieces, setPieces] = useState([0, 1, 2, 3]);
+  const [pieces, setPieces] = useState(() => createScrambledPieces());
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [solved, setSolved] = useState(false);
-
-  useEffect(() => {
-    // Shuffle pieces on mount
-    setPieces([0, 1, 2, 3].sort(() => Math.random() - 0.5));
-  }, []);
 
   useEffect(() => {
     if (pieces.every((value, index) => value === index)) {
@@ -55,17 +67,34 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
         }}
       >
         {!solved ? (
-          <Reorder.Group axis="y" values={pieces} onReorder={setPieces} className="w-full h-full grid grid-cols-2 gap-2" style={{ gridTemplateRows: '1fr 1fr' }}>
-            {pieces.map((piece) => {
+          <div className="w-full h-full grid grid-cols-2 gap-2" style={{ gridTemplateRows: '1fr 1fr' }}>
+            {pieces.map((piece, index) => {
               const layout = pieceLayouts[piece];
+              const gridPosition = gridPositions[index];
+              const isSelected = selectedIndex === index;
               return (
-                <Reorder.Item
+                <button
                   key={piece}
-                  value={piece}
-                  className="relative cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl"
-                  style={{ gridColumn: layout.gridColumn, gridRow: layout.gridRow }}
+                  type="button"
+                  onClick={() => {
+                    if (selectedIndex === null) {
+                      setSelectedIndex(index);
+                      return;
+                    }
+                    if (selectedIndex === index) {
+                      setSelectedIndex(null);
+                      return;
+                    }
+                    setPieces((current) => {
+                      const next = [...current];
+                      [next[selectedIndex], next[index]] = [next[index], next[selectedIndex]];
+                      return next;
+                    });
+                    setSelectedIndex(null);
+                  }}
+                  className={`relative overflow-hidden rounded-2xl border-4 transition ${isSelected ? 'border-pink-400 shadow-[0_0_0_4px_rgba(236,72,153,0.25)]' : 'border-transparent'} focus:outline-none`}
+                  style={{ gridColumn: gridPosition.gridColumn, gridRow: gridPosition.gridRow }}
                 >
-                  {/* Photo piece with enhanced hover effects */}
                   <motion.div
                     initial={{ scale: 1 }}
                     whileHover={{ scale: 1.02 }}
@@ -94,10 +123,10 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
                       transition={{ duration: 0.4 }}
                     />
                   </motion.div>
-                </Reorder.Item>
+                </button>
               );
             })}
-          </Reorder.Group>
+          </div>
         ) : (
           // Solved state with enhanced presentation
           <motion.div
