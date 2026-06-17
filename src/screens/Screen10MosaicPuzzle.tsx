@@ -7,11 +7,11 @@ interface Props {
 }
 
 const pieceLayouts = [
-  { id: 0, objectPosition: '0% 0%', gridColumn: '1', gridRow: '1' },
-  { id: 1, objectPosition: '100% 0%', gridColumn: '2', gridRow: '1' },
-  { id: 2, objectPosition: '0% 100%', gridColumn: '1', gridRow: '2' },
-  { id: 3, objectPosition: '100% 100%', gridColumn: '2', gridRow: '2' },
-  { id: 4, objectPosition: '50% 85%', gridColumn: '1 / span 2', gridRow: '3' }
+  { id: 0, backgroundPosition: 'left top', backgroundSize: '200% 200%', gridColumn: '1', gridRow: '1' },
+  { id: 1, backgroundPosition: 'right top', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '1' },
+  { id: 2, backgroundPosition: 'left bottom', backgroundSize: '200% 200%', gridColumn: '1', gridRow: '2' },
+  { id: 3, backgroundPosition: 'right bottom', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '2' },
+  { id: 4, backgroundPosition: '50% 85%', backgroundSize: '100% 180%', gridColumn: '1 / span 2', gridRow: '3' }
 ];
 
 // A 5-piece puzzle with four square sections and one wider rectangle section
@@ -74,11 +74,14 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
                     className="w-full h-full relative overflow-hidden"
                     transition={{ duration: 0.3 }}
                   >
-                    <img
-                      src={photo}
-                      alt=""
-                      className="w-full h-full object-cover pointer-events-none"
-                      style={{ objectPosition: layout.objectPosition }}
+                    <div
+                      className="w-full h-full pointer-events-none bg-center bg-no-repeat"
+                      style={{
+                        backgroundImage: `url(${photo})`,
+                        backgroundPosition: layout.backgroundPosition,
+                        backgroundSize: layout.backgroundSize,
+                        backgroundRepeat: 'no-repeat'
+                      }}
                     />
                     {/* Enhanced border glow on hover */}
                     <motion.div
