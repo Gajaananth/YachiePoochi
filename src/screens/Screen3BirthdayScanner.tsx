@@ -65,7 +65,15 @@ export default function Screen3BirthdayScanner({ onScanComplete }: Props) {
             animate={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center"
           >
-            <h2 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-500">
+            <h2
+              className="text-3xl font-bold mb-6"
+              style={{
+                background: 'linear-gradient(90deg, #00F5D4, #00bfff)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
               SCAN COMPLETE
             </h2>
             

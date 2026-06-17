@@ -48,7 +48,7 @@ export default function Screen6PersonalityTest({ onComplete }: Props) {
   return (
     <div className="w-full flex-grow flex items-center justify-center p-4">
       <div className="glass-panel p-8 md:p-12 rounded-3xl max-w-xl w-full text-center relative overflow-hidden">
-        <h2 className="text-sm font-bold text-purple-400 tracking-widest mb-8 uppercase">Yachie Personality Test</h2>
+        <h2 className="text-sm font-bold tracking-widest mb-8 uppercase" style={{ color: '#9D4EDD' }}>Yachie Personality Test</h2>
         
         <AnimatePresence mode="wait">
           {!showReaction ? (
@@ -59,7 +59,7 @@ export default function Screen6PersonalityTest({ onComplete }: Props) {
               exit={{ opacity: 0, x: -50 }}
               className="flex flex-col gap-8"
             >
-              <h3 className="text-2xl md:text-3xl font-bold text-white">{q.q}</h3>
+              <h3 className="text-2xl md:text-3xl font-bold" style={{ color: '#FFFFFF' }}>{q.q}</h3>
               <div className="flex flex-col gap-4">
                 {q.opts.map((opt, i) => (
                   <button
@@ -80,7 +80,7 @@ export default function Screen6PersonalityTest({ onComplete }: Props) {
               exit={{ opacity: 0, scale: 1.2 }}
               className="flex flex-col items-center gap-8 py-8"
             >
-              <p className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500">
+              <p className="text-3xl md:text-4xl font-bold" style={{ background: 'linear-gradient(90deg, #FFB703, #FF0A54)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 {q.reaction}
               </p>
               <button

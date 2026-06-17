@@ -48,7 +48,7 @@ export default function Screen13SystemFailure({ onRecover }: Props) {
   }
 
   return (
-    <div className={`w-full h-full flex flex-col items-center justify-center p-6 ${stage === 'frozen' ? 'bg-red-900' : 'bg-red-600'}`}>
+    <div className={`w-full flex-grow flex flex-col items-center justify-center p-6 min-h-screen ${stage === 'frozen' ? 'bg-red-900' : 'bg-red-600'}`}>
       <motion.div
         animate={stage === 'glitch' ? { x: [-5, 5, -5, 5, 0], y: [5, -5, 5, -5, 0] } : {}}
         transition={{ repeat: Infinity, duration: 0.2 }}

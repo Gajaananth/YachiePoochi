@@ -16,21 +16,31 @@ const achievements = [
 
 export default function Screen9Achievements({ onContinue }: Props) {
   return (
-    <div className="w-full flex-grow flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-12 overflow-y-auto bg-gradient-to-b from-transparent via-[#05000D] to-[#000000] no-scrollbar">
+    <div className="w-full flex-grow flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-12 overflow-y-auto no-scrollbar min-h-screen">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-10 md:mb-16 mt-4 md:mt-0"
+        className="text-center mb-8 sm:mb-12"
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] via-[#FF0A54] to-[#00F5D4]">
+        <h1
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4"
+          style={{
+            background: 'linear-gradient(90deg, #9D4EDD, #FF0A54, #00F5D4)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
           Achievements Unlocked
         </h1>
-        <p className="text-gray-400 text-sm md:text-base max-w-md">Celebrating your remarkable qualities.</p>
+        <p className="text-gray-300 text-sm md:text-base max-w-md">
+          Celebrating your remarkable qualities.
+        </p>
       </motion.div>
 
-      {/* Achievements Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl w-full mb-12 md:mb-16">
+      {/* Achievements Grid - No absolute positioning */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 max-w-5xl w-full mb-10 sm:mb-12">
         {achievements.map((ach, idx) => (
           <motion.div
             key={ach.id}
@@ -38,46 +48,28 @@ export default function Screen9Achievements({ onContinue }: Props) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: idx * 0.1, type: 'spring', stiffness: 100 }}
             whileHover={{ scale: 1.03, translateY: -3 }}
-            className="relative group"
+            className="glass-card p-4 sm:p-5 md:p-6 flex flex-col items-center text-center group cursor-default"
           >
-            {/* Glass Card Background */}
-            <div className="absolute inset-0 rounded-2xl md:rounded-3xl">
-              <div className="glass-card p-4 sm:p-6 md:p-8">
-                {/* Icon Circle */}
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="w-14 sm:w-16 h-14 sm:h-16 rounded-full flex items-center justify-center text-3xl sm:text-4xl flex-shrink-0 mb-4 sm:mb-5"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(183, 157, 255, 0.3), rgba(255, 183, 213, 0.3))',
-                    border: '2px solid rgba(183, 157, 255, 0.4)',
-                  }}
-                >
-                  {ach.icon}
-                </motion.div>
-
-                {/* Content */}
-                <div className="text-center">
-                  <p className="text-xs sm:text-sm text-[#FFB703] font-bold uppercase tracking-wider mb-1">Unlocked</p>
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white leading-tight group-hover:text-[#FF0A54] transition-colors">
-                    {ach.title}
-                  </h3>
-                </div>
-              </div>
-            </div>
-
-            {/* Simple Hover Effect */}
+            {/* Icon Circle */}
             <motion.div
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 0.2 }}
-              className="absolute inset-0 rounded-2xl md:rounded-3xl pointer-events-none"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="w-14 sm:w-16 h-14 sm:h-16 rounded-full flex items-center justify-center text-3xl sm:text-4xl mb-3 sm:mb-4"
               style={{
-                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-                backgroundSize: '200% 100%',
-                backgroundPosition: '-100% 0',
-                transition: 'background-position 0.5s ease'
+                background: 'linear-gradient(135deg, rgba(157, 78, 221, 0.3), rgba(255, 10, 84, 0.3))',
+                border: '2px solid rgba(157, 78, 221, 0.4)',
               }}
-            />
+            >
+              {ach.icon}
+            </motion.div>
+
+            {/* Content */}
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-wider mb-1" style={{ color: '#FFB703' }}>
+              Unlocked
+            </p>
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-white leading-tight group-hover:text-[#FF0A54] transition-colors">
+              {ach.title}
+            </h3>
           </motion.div>
         ))}
       </div>
@@ -90,12 +82,14 @@ export default function Screen9Achievements({ onContinue }: Props) {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={onContinue}
-        className="btn-glass-primary px-8 sm:px-10 md:px-12 py-3 sm:py-4 md:py-5 rounded-full font-bold text-white text-sm sm:text-base md:text-lg mb-8"
+        className="px-8 sm:px-10 md:px-12 py-3 sm:py-4 md:py-5 rounded-full font-bold text-white text-sm sm:text-base md:text-lg mb-8 flex-shrink-0"
         style={{
-          boxShadow: '0 0 30px rgba(183, 157, 255, 0.3)',
+          background: 'linear-gradient(135deg, rgba(157, 78, 221, 0.4), rgba(255, 10, 84, 0.4))',
+          border: '2px solid rgba(157, 78, 221, 0.5)',
+          boxShadow: '0 0 30px rgba(157, 78, 221, 0.3)',
         }}
       >
-        Next Challenge
+        Next Challenge →
       </motion.button>
     </div>
   );
