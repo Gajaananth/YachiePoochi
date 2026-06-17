@@ -1,14 +1,14 @@
 export const colors = {
   primary: {
-    lavender: '#B79DFF',
-    pink: '#FFB7D5',
-    blue: '#9ED8FF',
-    gold: '#FFD98A',
+    lavender: '#9D4EDD',
+    pink: '#FF0A54',
+    blue: '#00F5D4',
+    gold: '#FFB703',
   },
   background: {
-    deep: '#0F172A',
-    darker: '#0A0E1A',
-    darkest: '#050811',
+    deep: '#0B001A',
+    darker: '#05000D',
+    darkest: '#000000',
   },
   glass: {
     border: 'rgba(255, 255, 255, 0.15)',

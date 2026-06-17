@@ -50,13 +50,16 @@ export default function App() {
   };
 
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-[#0F172A] via-[#0A0E1A] to-[#050811] text-white relative overflow-hidden">
+    <div className="w-full min-h-screen bg-gradient-to-br from-[#0B001A] via-[#05000D] to-[#000000] text-white relative overflow-x-hidden flex flex-col">
       <AudioController />
 
       {/* Premium Global Components */}
-      <FloatingBalloons />
+      <div className="fixed inset-0 pointer-events-none z-50">
+        <FloatingBalloons />
+      </div>
+      
       {/* Animated background that changes subtly */}
-      <div className="opacity-30">
+      <div className="fixed inset-0 opacity-30 pointer-events-none -z-10">
         <AnimatedBackground variant="moving-glow" />
       </div>
 
@@ -67,7 +70,7 @@ export default function App() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="absolute inset-0 w-full h-full"
+          className="w-full flex-grow flex flex-col relative z-10"
         >
           {renderScreen()}
         </motion.div>

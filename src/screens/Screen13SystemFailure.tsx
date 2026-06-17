@@ -28,7 +28,7 @@ export default function Screen13SystemFailure({ onRecover }: Props) {
 
   if (stage === 'reveal') {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-pink-500">
+      <div className="w-full flex-grow flex flex-col items-center justify-center p-6 bg-pink-500">
         <motion.h1 
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}

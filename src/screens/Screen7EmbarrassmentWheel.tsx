@@ -45,7 +45,7 @@ export default function Screen7EmbarrassmentWheel({ onComplete }: Props) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4">
+    <div className="w-full flex-grow flex flex-col items-center justify-center p-4">
       <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-500">
         Spin the Wheel!
       </h2>

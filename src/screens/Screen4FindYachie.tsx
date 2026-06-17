@@ -39,7 +39,7 @@ export default function Screen4FindYachie({ onFound }: Props) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4 relative">
+    <div className="w-full flex-grow flex flex-col items-center justify-center p-4 relative">
       <div className="text-center mb-8 z-10 glass-panel p-6 rounded-2xl max-w-lg w-full">
         <h2 className="text-3xl font-bold mb-2 text-pink-400">Find the Real Yachie</h2>
         <p className="text-gray-300">Identify the true birthday girl among these imposters.</p>

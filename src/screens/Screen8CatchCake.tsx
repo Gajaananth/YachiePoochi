@@ -48,7 +48,7 @@ export default function Screen8CatchCake({ onCaught }: Props) {
 
   if (hits >= 3) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center p-4">
+      <div className="w-full flex-grow flex flex-col items-center justify-center p-4">
         <motion.h2 
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -66,14 +66,14 @@ export default function Screen8CatchCake({ onCaught }: Props) {
       <div className="absolute top-6 md:top-10 left-0 w-full text-center pointer-events-none z-10">
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2 md:mb-3">Catch the Cake!</h2>
         <div className="flex justify-center gap-4 md:gap-6 text-sm md:text-base">
-          <p className="text-[#FFB7D5]">Taps: <span className="font-bold text-lg md:text-xl text-[#FFD98A]">{hits}</span> / 3</p>
+          <p className="text-[#FF0A54]">Taps: <span className="font-bold text-lg md:text-xl text-[#FFB703]">{hits}</span> / 3</p>
         </div>
         {message && (
           <motion.p
             key={message}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-lg md:text-2xl mt-3 md:mt-4 text-[#9ED8FF] font-semibold"
+            className="text-lg md:text-2xl mt-3 md:mt-4 text-[#00F5D4] font-semibold"
           >
             {message}
           </motion.p>
@@ -103,7 +103,7 @@ export default function Screen8CatchCake({ onCaught }: Props) {
             <motion.h2
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFD98A] to-[#FFB7D5]"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFB703] to-[#FF0A54]"
             >
               CAKE CAUGHT! 🎉
             </motion.h2>

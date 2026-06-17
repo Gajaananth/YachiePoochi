@@ -26,9 +26,9 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
   }, [pieces]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-6">
+    <div className="w-full flex-grow flex flex-col items-center justify-center p-4 sm:p-6">
       <div className="text-center mb-8 sm:mb-10">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#B79DFF] via-[#FFB7D5] to-[#9ED8FF]">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] via-[#FF0A54] to-[#00F5D4]">
           Photo Recovery
         </h1>
         <p className="text-sm md:text-lg text-gray-300 max-w-md">

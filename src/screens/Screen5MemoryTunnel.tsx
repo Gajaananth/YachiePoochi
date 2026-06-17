@@ -37,14 +37,14 @@ export default function Screen5MemoryTunnel({ onComplete }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="w-full h-full bg-gradient-to-b from-transparent via-[#0A0E1A] to-[#050811] flex flex-col items-center relative px-4 py-8 md:py-12">
+    <div className="w-full flex-grow bg-gradient-to-b from-transparent via-[#05000D] to-[#000000] flex flex-col items-center relative px-4 py-8 md:py-12">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="absolute top-6 md:top-10 z-20 text-center"
       >
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#B79DFF] to-[#FFB7D5] tracking-wide">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] to-[#FF0A54] tracking-wide">
           Memory Tunnel
         </h1>
         <p className="text-xs md:text-sm text-gray-400 mt-2">Scroll to explore →</p>

@@ -1,14 +1,13 @@
 @import "tailwindcss";
-@import "tailwindcss/utilities";
 
 @theme {
   /* Primary Color Palette */
-  --color-lavender: #B79DFF;      /* Soft Lavender - Primary */
-  --color-pink: #FFB7D5;          /* Rose Pink - Secondary */
-  --color-blue: #9ED8FF;          /* Sky Blue - Accent */
-  --color-gold: #FFD98A;          /* Soft Gold - Highlights */
-  --color-deep: #0F172A;          /* Deep Midnight - Background */
-  --color-darker: #0A0E1A;        /* Variant Background */
+  --color-lavender: #9D4EDD;      /* Soft Lavender - Primary */
+  --color-pink: #FF0A54;          /* Rose Pink - Secondary */
+  --color-blue: #00F5D4;          /* Sky Blue - Accent */
+  --color-gold: #FFB703;          /* Soft Gold - Highlights */
+  --color-deep: #0B001A;          /* Deep Midnight - Background */
+  --color-darker: #05000D;        /* Variant Background */
 
   /* Glassmorphism */
   --color-glass-background: rgba(255, 255, 255, 0.08);
@@ -52,16 +51,18 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--color-deep) 0%, var(--color-darker) 50%, #050811 100%);
+  background: linear-gradient(135deg, var(--color-deep) 0%, var(--color-darker) 50%, #000000 100%);
   color: white;
+  overflow-x: hidden;
 }
 
 #root {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   position: relative;
   isolation: isolate;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Enhanced Glassmorphism */

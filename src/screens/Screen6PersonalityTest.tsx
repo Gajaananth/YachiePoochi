@@ -46,7 +46,7 @@ export default function Screen6PersonalityTest({ onComplete }: Props) {
   const q = questions[currentQ];
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-4">
+    <div className="w-full flex-grow flex items-center justify-center p-4">
       <div className="glass-panel p-8 md:p-12 rounded-3xl max-w-xl w-full text-center relative overflow-hidden">
         <h2 className="text-sm font-bold text-purple-400 tracking-widest mb-8 uppercase">Yachie Personality Test</h2>
         

@@ -37,13 +37,13 @@ export default function Screen2IdentityVerification({ onVerify }: Props) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 sm:p-8 bg-gradient-to-b from-transparent via-[#0A0E1A] to-[#050811]">
+    <div className="w-full flex-grow flex flex-col items-center justify-center p-6 sm:p-8 bg-gradient-to-b from-transparent via-[#05000D] to-[#000000]">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-8 sm:mb-12"
       >
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#B79DFF] to-[#FFB7D5]">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] to-[#FF0A54]">
           Wait...
         </h1>
         <p className="text-sm md:text-lg text-gray-300 max-w-md">Is it actually your birthday today?</p>

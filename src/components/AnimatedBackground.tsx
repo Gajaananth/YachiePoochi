@@ -223,7 +223,7 @@ export function AnimatedBackground({ variant = 'soft' }: AnimatedBackgroundProps
             key={i}
             className="absolute w-2 h-2 rounded-full"
             style={{
-              background: ['#B79DFF', '#FFB7D5', '#9ED8FF'][Math.floor(Math.random() * 3)],
+              background: ['#9D4EDD', '#FF0A54', '#00F5D4'][Math.floor(Math.random() * 3)],
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               boxShadow: `0 0 ${8 + Math.random() * 8}px currentColor`,
@@ -250,7 +250,7 @@ export function AnimatedBackground({ variant = 'soft' }: AnimatedBackgroundProps
         <motion.div
           className="absolute w-64 h-64 rounded-full blur-3xl opacity-20"
           style={{
-            background: 'radial-gradient(circle, #B79DFF, transparent)',
+            background: 'radial-gradient(circle, #9D4EDD, transparent)',
             top: '-20%',
             left: '-10%',
           }}
@@ -267,7 +267,7 @@ export function AnimatedBackground({ variant = 'soft' }: AnimatedBackgroundProps
         <motion.div
           className="absolute w-96 h-96 rounded-full blur-3xl opacity-15"
           style={{
-            background: 'radial-gradient(circle, #FFB7D5, transparent)',
+            background: 'radial-gradient(circle, #FF0A54, transparent)',
             bottom: '-20%',
             right: '-10%',
           }}

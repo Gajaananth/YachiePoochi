@@ -12,7 +12,7 @@ interface Balloon {
   oscillationSpeed: number;
 }
 
-const balloonColors = ['#B79DFF', '#FFB7D5', '#9ED8FF', '#FFD98A'];
+const balloonColors = ['#9D4EDD', '#FF0A54', '#00F5D4', '#FFB703'];
 
 function generateRandomBalloon(fromLeft: boolean): Balloon {
   // Determine if balloon comes from left or right side

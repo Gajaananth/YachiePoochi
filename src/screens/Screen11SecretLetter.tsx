@@ -62,9 +62,9 @@ export default function Screen11SecretLetter({ onContinue }: Props) {
   }, [currentLine, visibleChars]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 relative overflow-hidden">
+    <div className="w-full flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 relative">
       {/* Premium Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A] via-[#0A0E1A] to-[#050811]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0B001A] via-[#05000D] to-[#000000]" />
 
       {/* Letter Container */}
       <motion.div
@@ -91,7 +91,7 @@ export default function Screen11SecretLetter({ onContinue }: Props) {
                 <motion.span
                   animate={{ opacity: [1, 0] }}
                   transition={{ repeat: Infinity, duration: 0.8 }}
-                  className="text-[#B79DFF]"
+                  className="text-[#9D4EDD]"
                 >
                   |
                 </motion.span>

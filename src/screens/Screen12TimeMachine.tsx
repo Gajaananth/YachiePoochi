@@ -27,19 +27,19 @@ export default function Screen12TimeMachine({ onContinue }: Props) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-b from-transparent via-[#0A0E1A] to-[#050811] overflow-hidden">
+    <div className="w-full flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-b from-transparent via-[#05000D] to-[#000000]">
       {/* Title */}
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#B79DFF] to-[#FFB7D5] tracking-wide"
+        className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] to-[#FF0A54] tracking-wide"
       >
         Time Machine
       </motion.h2>
 
       {/* Timeline Selector */}
       <div className="flex gap-3 sm:gap-4 md:gap-6 mb-8 md:mb-12 w-full max-w-md justify-between relative px-2 sm:px-0">
-        <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-[#B79DFF]/20 via-[#FFB7D5]/20 to-[#9ED8FF]/20 -translate-y-1/2 -z-10" />
+        <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-[#9D4EDD]/20 via-[#FF0A54]/20 to-[#00F5D4]/20 -translate-y-1/2 -z-10" />
 
         {(['past', 'present', 'future'] as const).map((era) => (
           <motion.button
@@ -58,7 +58,7 @@ export default function Screen12TimeMachine({ onContinue }: Props) {
                   background: 'rgba(255, 255, 255, 0.15)',
                   border: '2px solid rgba(183, 157, 255, 0.6)',
                   boxShadow: '0 0 20px rgba(183, 157, 255, 0.4)',
-                  color: '#FFD98A',
+                  color: '#FFB703',
                 }
                 : {
                   background: 'rgba(255, 255, 255, 0.05)',
@@ -88,19 +88,19 @@ export default function Screen12TimeMachine({ onContinue }: Props) {
         <div className="absolute top-0 left-0 w-full h-1" style={{
           background: `linear-gradient(90deg, ${
             activeEra === 'past'
-              ? '#FFD98A'
+              ? '#FFB703'
               : activeEra === 'present'
-                ? '#FFB7D5'
-                : '#9ED8FF'
+                ? '#FF0A54'
+                : '#00F5D4'
           }, transparent)`,
         }} />
 
         <h3 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r ${
           activeEra === 'past'
-            ? 'from-[#FFD98A] to-[#FFB7D5]'
+            ? 'from-[#FFB703] to-[#FF0A54]'
             : activeEra === 'present'
-              ? 'from-[#FFB7D5] to-[#B79DFF]'
-              : 'from-[#9ED8FF] to-[#B79DFF]'
+              ? 'from-[#FF0A54] to-[#9D4EDD]'
+              : 'from-[#00F5D4] to-[#9D4EDD]'
         }`}>
           {eras[activeEra].title}
         </h3>

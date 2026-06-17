@@ -44,7 +44,7 @@ export default function Screen1SecretArchive({ onUnlock }: Props) {
   };
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center px-4 py-8 overflow-hidden">
+    <div className="relative w-full flex-grow flex flex-col items-center justify-center px-4 py-8">
       {/* Premium Blurred Background */}
       <div className={`absolute inset-0 grid grid-cols-3 md:grid-cols-5 gap-1 transition-all duration-[2000ms] ${isUnlocked ? 'blur-none opacity-100' : 'blur-2xl opacity-30'}`}>
         {backgroundPhotos.map((photo, idx) => (
@@ -69,24 +69,24 @@ export default function Screen1SecretArchive({ onUnlock }: Props) {
         <div className="p-6 sm:p-8 md:p-10 rounded-3xl text-center">
           {/* Icon */}
           <motion.div
-            animate={isUnlocked ? { scale: 1.1, color: '#FFD98A' } : {}}
+            animate={isUnlocked ? { scale: 1.1, color: '#FFB703' } : {}}
             transition={{ type: 'spring' }}
             className="flex justify-center mb-6"
           >
             {isUnlocked ? (
-              <Unlock size={56} className="text-[#FFD98A]" />
+              <Unlock size={56} className="text-[#FFB703]" />
             ) : (
-              <Lock size={56} className="text-[#FFB7D5]" />
+              <Lock size={56} className="text-[#FF0A54]" />
             )}
           </motion.div>
 
           {/* Title */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#B79DFF] via-[#FFB7D5] to-[#9ED8FF]">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] via-[#FF0A54] to-[#00F5D4]">
             SECRET ARCHIVE
           </h1>
 
           {/* Subtitle */}
-          <p className="text-[#FFD98A] font-semibold mb-2 tracking-widest uppercase text-xs sm:text-sm">
+          <p className="text-[#FFB703] font-semibold mb-2 tracking-widest uppercase text-xs sm:text-sm">
             ACCESS RESTRICTED
           </p>
           <p className="text-gray-300 text-xs sm:text-sm mb-6">
@@ -109,7 +109,7 @@ export default function Screen1SecretArchive({ onUnlock }: Props) {
                   errorMsg
                     ? 'bg-red-500/20 border-2 border-red-500/50 text-red-100'
                     : 'bg-white/10 border border-white/20 text-white placeholder-white/50'
-                } focus:outline-none focus:ring-2 focus:ring-[#B79DFF] focus:bg-white/15 text-sm sm:text-base`}
+                } focus:outline-none focus:ring-2 focus:ring-[#9D4EDD] focus:bg-white/15 text-sm sm:text-base`}
               />
               {errorMsg && (
                 <motion.p
@@ -122,7 +122,7 @@ export default function Screen1SecretArchive({ onUnlock }: Props) {
               )}
               <button
                 type="submit"
-                className="mt-2 px-6 py-3 sm:py-4 bg-gradient-to-r from-[#B79DFF] to-[#FFB7D5] rounded-xl font-bold text-white hover:scale-105 active:scale-95 transition-all shadow-lg shadow-[#B79DFF]/30 text-sm sm:text-base"
+                className="mt-2 px-6 py-3 sm:py-4 bg-gradient-to-r from-[#9D4EDD] to-[#FF0A54] rounded-xl font-bold text-white hover:scale-105 active:scale-95 transition-all shadow-lg shadow-[#9D4EDD]/30 text-sm sm:text-base"
               >
                 Verify Identity
               </button>
@@ -131,7 +131,7 @@ export default function Screen1SecretArchive({ onUnlock }: Props) {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-[#FFD98A] text-lg sm:text-xl font-bold mt-4"
+              className="text-[#FFB703] text-lg sm:text-xl font-bold mt-4"
             >
               ✓ Access Granted
               <p className="text-sm text-gray-300 mt-2">Welcome, Yachie</p>

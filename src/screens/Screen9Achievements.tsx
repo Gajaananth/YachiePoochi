@@ -16,14 +16,14 @@ const achievements = [
 
 export default function Screen9Achievements({ onContinue }: Props) {
   return (
-    <div className="w-full h-full flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-12 overflow-y-auto bg-gradient-to-b from-transparent via-[#0A0E1A] to-[#050811] no-scrollbar">
+    <div className="w-full flex-grow flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-12 overflow-y-auto bg-gradient-to-b from-transparent via-[#05000D] to-[#000000] no-scrollbar">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-10 md:mb-16 mt-4 md:mt-0"
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#B79DFF] via-[#FFB7D5] to-[#9ED8FF]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] via-[#FF0A54] to-[#00F5D4]">
           Achievements Unlocked
         </h1>
         <p className="text-gray-400 text-sm md:text-base max-w-md">Celebrating your remarkable qualities.</p>
@@ -58,8 +58,8 @@ export default function Screen9Achievements({ onContinue }: Props) {
 
                 {/* Content */}
                 <div className="text-center">
-                  <p className="text-xs sm:text-sm text-[#FFD98A] font-bold uppercase tracking-wider mb-1">Unlocked</p>
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white leading-tight group-hover:text-[#FFB7D5] transition-colors">
+                  <p className="text-xs sm:text-sm text-[#FFB703] font-bold uppercase tracking-wider mb-1">Unlocked</p>
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white leading-tight group-hover:text-[#FF0A54] transition-colors">
                     {ach.title}
                   </h3>
                 </div>

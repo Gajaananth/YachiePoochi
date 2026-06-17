@@ -55,7 +55,7 @@ export default function Screen15GrandFinale() {
   }, [phase]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4 relative overflow-hidden bg-black">
+    <div className="w-full flex-grow flex flex-col items-center justify-center p-4 relative bg-black">
       {/* Phase: Fade to black */}
       {phase !== 'fade' && (
         <>

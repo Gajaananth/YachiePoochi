@@ -45,7 +45,7 @@ export default function Screen14SecretVault({ onComplete }: Props) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-b from-transparent via-[#0A0E1A] to-[#050811] relative overflow-auto no-scrollbar">
+    <div className="w-full flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-b from-transparent via-[#05000D] to-[#000000] relative overflow-auto no-scrollbar">
       <AnimatePresence mode="wait">
         {stage === 'closed' && (
           <motion.div
@@ -67,7 +67,7 @@ export default function Screen14SecretVault({ onComplete }: Props) {
             >
               <span className="text-6xl sm:text-7xl md:text-8xl">💎</span>
             </motion.div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-6 md:mt-8 text-[#FFD98A]">Secret Vault</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-6 md:mt-8 text-[#FFB703]">Secret Vault</h2>
             <p className="text-gray-400 mt-2 md:mt-3 text-sm sm:text-base">Tap to unlock hidden treasures</p>
           </motion.div>
         )}
@@ -80,7 +80,7 @@ export default function Screen14SecretVault({ onComplete }: Props) {
             exit={{ opacity: 0, y: -50 }}
             className="w-full max-w-6xl flex flex-col items-center py-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#FFD98A] to-[#FFB7D5]">Hidden Photo Collection</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#FFB703] to-[#FF0A54]">Hidden Photo Collection</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-8 md:mb-12 w-full px-2">
               {vaultPhotos.map((photo, idx) => (
                 <motion.div
@@ -124,7 +124,7 @@ export default function Screen14SecretVault({ onComplete }: Props) {
             exit={{ opacity: 0, y: -50 }}
             className="w-full max-w-3xl flex flex-col items-center py-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#B79DFF] to-[#9ED8FF]">Words Worth Keeping</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#9D4EDD] to-[#00F5D4]">Words Worth Keeping</h2>
             <div className="space-y-3 md:space-y-4 mb-8 md:mb-12 w-full px-4 sm:px-0">
               {wordsWorthKeeping.map((word, idx) => (
                 <motion.div
@@ -169,7 +169,7 @@ export default function Screen14SecretVault({ onComplete }: Props) {
             exit={{ opacity: 0, y: -50 }}
             className="w-full max-w-3xl flex flex-col items-center py-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#FFB7D5] to-[#B79DFF]">Future Wishes</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#FF0A54] to-[#9D4EDD]">Future Wishes</h2>
             <div className="space-y-3 md:space-y-4 mb-8 md:mb-12 w-full px-4 sm:px-0">
               {futureWishes.map((wish, idx) => (
                 <motion.div
@@ -216,7 +216,7 @@ export default function Screen14SecretVault({ onComplete }: Props) {
             <motion.div
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ repeat: Infinity, duration: 1 }}
-              className="text-7xl sm:text-8xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFB7D5] to-[#B79DFF] mb-4"
+              className="text-7xl sm:text-8xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FF0A54] to-[#9D4EDD] mb-4"
             >
               {countdown}
             </motion.div>

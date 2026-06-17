@@ -31,7 +31,7 @@ export default function Screen3BirthdayScanner({ onScanComplete }: Props) {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-slate-900">
+    <div className="w-full flex-grow flex flex-col items-center justify-center p-6 bg-slate-900">
       <div className="max-w-md w-full glass-panel p-8 rounded-3xl">
         {scanning ? (
           <div className="flex flex-col items-center">
