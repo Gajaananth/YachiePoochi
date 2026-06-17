@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getRandomPhotos } from '../data/photos';
 
 interface Props {
   onComplete: () => void;
@@ -29,7 +28,16 @@ const futureWishes = [
 export default function Screen14SecretVault({ onComplete }: Props) {
   const [stage, setStage] = useState<'closed' | 'photos' | 'words' | 'wishes' | 'countdown'>('closed');
   const [countdown, setCountdown] = useState(3);
-  const vaultPhotos = getRandomPhotos(8);
+  const vaultPhotos = [
+    new URL('../../hidden photo collection/Gemini_Generated_Image_7wntud7wntud7wnt.png', import.meta.url).href,
+    new URL('../../hidden photo collection/Gemini_Generated_Image_9a9lqn9a9lqn9a9l.png', import.meta.url).href,
+    new URL('../../hidden photo collection/Gemini_Generated_Image_b71n4vb71n4vb71n.png', import.meta.url).href,
+    new URL('../../hidden photo collection/Gemini_Generated_Image_gh8ju3gh8ju3gh8j.png', import.meta.url).href,
+    new URL('../../hidden photo collection/Gemini_Generated_Image_gux057gux057gux0.png', import.meta.url).href,
+    new URL('../../hidden photo collection/Gemini_Generated_Image_t7eayrt7eayrt7ea.png', import.meta.url).href,
+    new URL('../../hidden photo collection/Gemini_Generated_Image_u5k045u5k045u5k0.png', import.meta.url).href,
+    new URL('../../hidden photo collection/Gemini_Generated_Image_x08eqsx08eqsx08e.png', import.meta.url).href,
+  ];
 
   const handleCountdown = () => {
     setStage('countdown');

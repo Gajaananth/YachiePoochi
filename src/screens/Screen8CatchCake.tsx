@@ -11,6 +11,7 @@ export default function Screen8CatchCake({ onCaught }: Props) {
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [message, setMessage] = useState('');
   const [caught, setCaught] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const messages = [
     "Got me! 🎯",
@@ -18,18 +19,26 @@ export default function Screen8CatchCake({ onCaught }: Props) {
     "Almost done! 🎉"
   ];
 
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const moveCake = useCallback(() => {
     setPosition({
-      x: 10 + Math.random() * 75,
-      y: 15 + Math.random() * 65
+      x: Math.max(5, Math.min(92, Math.random() * 90)),
+      y: 10 + Math.random() * 70
     });
   }, []);
 
   useEffect(() => {
     if (caught) return;
-    const interval = setInterval(moveCake, Math.max(900 - hits * 100, 400));
+    const delay = isMobile ? Math.max(650 - hits * 120, 250) : Math.max(900 - hits * 100, 400);
+    const interval = setInterval(moveCake, delay);
     return () => clearInterval(interval);
-  }, [hits, caught, moveCake]);
+  }, [hits, caught, moveCake, isMobile]);
 
   const handleHit = () => {
     if (caught) return;
@@ -110,10 +119,10 @@ export default function Screen8CatchCake({ onCaught }: Props) {
             left: `${position.x}%`, 
             top: `${position.y}%` 
           }}
-          transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+          transition={{ type: 'spring', stiffness: isMobile ? 220 : 120, damping: isMobile ? 16 : 18 }}
           onClick={handleHit}
           onTouchEnd={(e) => { e.preventDefault(); handleHit(); }}
-          className="absolute text-5xl sm:text-6xl md:text-7xl cursor-pointer select-none active:scale-75 transition-transform z-30 -translate-x-1/2 -translate-y-1/2"
+          className={`absolute ${isMobile ? 'text-4xl' : 'text-5xl'} sm:text-6xl md:text-7xl cursor-pointer select-none active:scale-75 transition-transform z-30 -translate-x-1/2 -translate-y-1/2`}
           style={{ touchAction: 'manipulation' }}
         >
           🎂

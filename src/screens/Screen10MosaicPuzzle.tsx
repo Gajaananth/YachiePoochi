@@ -6,19 +6,19 @@ interface Props {
   onComplete: () => void;
 }
 
-// A simple 3-piece vertical puzzle to keep it easy to build and play on mobile
+// A 7-piece vertical puzzle for the photo recovery challenge
 export default function Screen10MosaicPuzzle({ onComplete }: Props) {
   const [photo] = useState(() => getRandomPhoto());
-  const [pieces, setPieces] = useState([0, 1, 2]);
+  const [pieces, setPieces] = useState([0, 1, 2, 3, 4, 5, 6]);
   const [solved, setSolved] = useState(false);
 
   useEffect(() => {
     // Shuffle pieces on mount
-    setPieces([1, 2, 0].sort(() => Math.random() - 0.5));
+    setPieces([0, 1, 2, 3, 4, 5, 6].sort(() => Math.random() - 0.5));
   }, []);
 
   useEffect(() => {
-    if (pieces[0] === 0 && pieces[1] === 1 && pieces[2] === 2) {
+    if (pieces.every((value, index) => value === index)) {
       setSolved(true);
     } else {
       setSolved(false);
@@ -66,8 +66,8 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
                   <img
                     src={photo}
                     alt=""
-                    className="absolute w-full h-[300%] object-cover pointer-events-none transition-transform duration-500"
-                    style={{ top: `-${piece * 100}%` }}
+                    className="absolute w-full h-[700%] object-cover pointer-events-none transition-transform duration-500"
+                    style={{ top: `-${piece * (100 / 7)}%` }}
                   />
                   {/* Enhanced border glow on hover */}
                   <motion.div

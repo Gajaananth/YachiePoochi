@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { getRandomPhoto } from '../data/photos';
-
-import starPic from '../assets/star.jpg';
 
 interface Props {
   onComplete: () => void;
 }
+
+const WHEEL_REWARD_PHOTO = '/photos/557641944_1464942431434504_6210336444418229346_n.jpg';
 
 const rewards = [
   "Kind Heart 💖",
@@ -40,8 +39,8 @@ export default function Screen7EmbarrassmentWheel({ onComplete }: Props) {
     const index = Math.floor(((targetRotation % 360) / 360) * rewards.length);
     const selectedReward = rewards[index] || rewards[0];
     
-    // Use the star pic for Birthday Star, else random photo
-    const selectedPhoto = selectedReward.includes("Birthday Star") ? starPic : getRandomPhoto();
+    // Always use the exact static image provided by the user
+    const selectedPhoto = WHEEL_REWARD_PHOTO;
     
     setResult(selectedReward);
     setPhoto(selectedPhoto);
