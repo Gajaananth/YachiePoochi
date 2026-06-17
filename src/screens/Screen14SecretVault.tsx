@@ -214,8 +214,6 @@ export default function Screen14SecretVault({ onComplete }: Props) {
             className="text-center py-12"
           >
             <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 1 }}
               className="text-7xl sm:text-8xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FF0A54] to-[#9D4EDD] mb-4"
             >
               {countdown}

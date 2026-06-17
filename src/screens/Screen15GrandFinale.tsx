@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { photoFiles } from '../data/photos';
+import monkeyPic from '../assets/monkey.jpg';
 
 export default function Screen15GrandFinale() {
   const [phase, setPhase] = useState<'fade' | 'text1' | 'text2' | 'photos' | 'lights' | 'fireworks' | 'message' | 'final'>('fade');
@@ -152,28 +153,10 @@ export default function Screen15GrandFinale() {
             >
               <div className="text-center">
                 <motion.h1
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
                   className="text-5xl md:text-7xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 drop-shadow-lg"
                 >
                   🎂 HAPPY BIRTHDAY YACHIE 🎂
                 </motion.h1>
-
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 }}
-                  className="text-lg md:text-2xl text-gray-200 leading-relaxed space-y-4 max-w-2xl"
-                >
-                  <p>May your kindness remain your strength.</p>
-                  <p>May your smile remain your light.</p>
-                  <p>May your future be brighter than every dream waiting ahead.</p>
-                  <div className="pt-4 space-y-2">
-                    <p className="text-pink-300 font-semibold">Keep believing.</p>
-                    <p className="text-purple-300 font-semibold">Keep growing.</p>
-                    <p className="text-cyan-300 font-semibold">Keep shining.</p>
-                  </div>
-                </motion.div>
               </div>
             </motion.div>
           )}
@@ -197,7 +180,7 @@ export default function Screen15GrandFinale() {
             </motion.div>
           )}
 
-          {/* Final Heart Message */}
+          {/* Final Monkey Picture Message */}
           {phase === 'final' && (
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
@@ -205,20 +188,7 @@ export default function Screen15GrandFinale() {
               transition={{ delay: 3, type: 'spring' }}
               className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 text-center"
             >
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-                className="text-9xl mb-6"
-              >
-                💖
-              </motion.div>
-              <motion.p
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="text-2xl text-pink-300 font-light"
-              >
-                The best chapters of your story are still ahead.
-              </motion.p>
+              <img src={monkeyPic} alt="Happy Birthday" className="max-w-[80vw] max-h-[60vh] object-contain rounded-2xl shadow-2xl border-4 border-pink-500 mb-6" />
             </motion.div>
           )}
         </>
