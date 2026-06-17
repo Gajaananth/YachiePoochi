@@ -6,15 +6,23 @@ interface Props {
   onComplete: () => void;
 }
 
-// A 7-piece vertical puzzle for the photo recovery challenge
+const pieceLayouts = [
+  { id: 0, objectPosition: '0% 0%', gridColumn: '1', gridRow: '1' },
+  { id: 1, objectPosition: '100% 0%', gridColumn: '2', gridRow: '1' },
+  { id: 2, objectPosition: '0% 100%', gridColumn: '1', gridRow: '2' },
+  { id: 3, objectPosition: '100% 100%', gridColumn: '2', gridRow: '2' },
+  { id: 4, objectPosition: '50% 85%', gridColumn: '1 / span 2', gridRow: '3' }
+];
+
+// A 5-piece puzzle with four square sections and one wider rectangle section
 export default function Screen10MosaicPuzzle({ onComplete }: Props) {
   const [photo] = useState(() => getRandomPhoto());
-  const [pieces, setPieces] = useState([0, 1, 2, 3, 4, 5, 6]);
+  const [pieces, setPieces] = useState([0, 1, 2, 3, 4]);
   const [solved, setSolved] = useState(false);
 
   useEffect(() => {
     // Shuffle pieces on mount
-    setPieces([0, 1, 2, 3, 4, 5, 6].sort(() => Math.random() - 0.5));
+    setPieces([0, 1, 2, 3, 4].sort(() => Math.random() - 0.5));
   }, []);
 
   useEffect(() => {
@@ -48,41 +56,45 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
         }}
       >
         {!solved ? (
-          <Reorder.Group axis="y" values={pieces} onReorder={setPieces} className="w-full h-full flex flex-col">
-            {pieces.map((piece) => (
-              <Reorder.Item
-                key={piece}
-                value={piece}
-                className="w-full flex-1 relative cursor-grab active:cursor-grabbing overflow-hidden"
-              >
-                {/* Photo piece with enhanced hover effects */}
-                <motion.div
-                  initial={{ scale: 1 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full h-full relative overflow-hidden"
-                  transition={{ duration: 0.3 }}
+          <Reorder.Group axis="y" values={pieces} onReorder={setPieces} className="w-full h-full grid grid-cols-2 gap-2" style={{ gridTemplateRows: '1fr 1fr 0.9fr' }}>
+            {pieces.map((piece) => {
+              const layout = pieceLayouts[piece];
+              return (
+                <Reorder.Item
+                  key={piece}
+                  value={piece}
+                  className="relative cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl"
+                  style={{ gridColumn: layout.gridColumn, gridRow: layout.gridRow }}
                 >
-                  <img
-                    src={photo}
-                    alt=""
-                    className="absolute w-full h-[700%] object-cover pointer-events-none transition-transform duration-500"
-                    style={{ top: `-${piece * (100 / 7)}%` }}
-                  />
-                  {/* Enhanced border glow on hover */}
+                  {/* Photo piece with enhanced hover effects */}
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 0.6 }}
-                    className="absolute inset-0 rounded pointer-events-none"
-                    style={{
-                      border: '2px solid rgba(255, 255, 255, 0.4)',
-                      background: 'linear-gradient(135deg, rgba(183, 157, 255, 0.1), rgba(255, 183, 213, 0.1))',
-                    }}
-                    transition={{ duration: 0.4 }}
-                  />
-                </motion.div>
-              </Reorder.Item>
-            ))}
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full h-full relative overflow-hidden"
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img
+                      src={photo}
+                      alt=""
+                      className="w-full h-full object-cover pointer-events-none"
+                      style={{ objectPosition: layout.objectPosition }}
+                    />
+                    {/* Enhanced border glow on hover */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 0.6 }}
+                      className="absolute inset-0 rounded pointer-events-none"
+                      style={{
+                        border: '2px solid rgba(255, 255, 255, 0.4)',
+                        background: 'linear-gradient(135deg, rgba(183, 157, 255, 0.1), rgba(255, 183, 213, 0.1))',
+                      }}
+                      transition={{ duration: 0.4 }}
+                    />
+                  </motion.div>
+                </Reorder.Item>
+              );
+            })}
           </Reorder.Group>
         ) : (
           // Solved state with enhanced presentation
