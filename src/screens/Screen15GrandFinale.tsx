@@ -4,12 +4,20 @@ import confetti from 'canvas-confetti';
 import { photoFiles } from '../data/photos';
 import monkeyPic from '../assets/monkey.jpg';
 
-export default function Screen15GrandFinale() {
-  const [phase, setPhase] = useState<'fade' | 'text1' | 'text2' | 'photos' | 'lights' | 'fireworks' | 'message' | 'final'>('fade');
+interface Props {
+  onStartFinalSong: () => void;
+}
+
+type FinalePhase = 'fade' | 'text1' | 'text2' | 'photos' | 'lights' | 'fireworks' | 'message' | 'final';
+
+export default function Screen15GrandFinale({ onStartFinalSong }: Props) {
+  const [phase, setPhase] = useState<FinalePhase>('fade');
+  const [loadingFinal, setLoadingFinal] = useState(false);
+  const [showFinalImage, setShowFinalImage] = useState(false);
 
   useEffect(() => {
     // We stop at 'message'. 'final' is triggered by button click!
-    const phases = [
+    const phases: Array<{ phase: Exclude<FinalePhase, 'final'>; delay: number }> = [
       { phase: 'fade', delay: 500 },
       { phase: 'text1', delay: 2000 },
       { phase: 'text2', delay: 3500 },
@@ -17,10 +25,10 @@ export default function Screen15GrandFinale() {
       { phase: 'lights', delay: 5500 },
       { phase: 'fireworks', delay: 6500 },
       { phase: 'message', delay: 8000 }
-    ] as const;
+    ];
 
     const timers = phases.map(({ phase: p, delay }) =>
-      setTimeout(() => setPhase(p as any), delay)
+      setTimeout(() => setPhase(p), delay)
     );
 
     return () => timers.forEach(t => clearTimeout(t));
@@ -96,7 +104,7 @@ export default function Screen15GrandFinale() {
           )}
 
           {/* Photo Collage Background (Fades out when message appears) */}
-          {(phase === 'photos' || phase === 'lights' || phase === 'fireworks') && (
+          {(phase === 'photos' || phase === 'lights' || phase === 'fireworks') && !loadingFinal && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: phase === 'photos' ? 0.3 : 0.5 }}
@@ -138,7 +146,15 @@ export default function Screen15GrandFinale() {
                   transition={{ delay: 2 }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => setPhase('final')}
+                  onClick={() => {
+                    if (loadingFinal || showFinalImage) return;
+                    setLoadingFinal(true);
+                    onStartFinalSong();
+                    setTimeout(() => {
+                      setLoadingFinal(false);
+                      setShowFinalImage(true);
+                    }, 1000);
+                  }}
                   className="mt-12 px-10 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full font-bold text-lg text-white shadow-xl shadow-pink-500/30 hover:shadow-2xl transition-all cursor-pointer"
                 >
                   One Last Surprise
@@ -148,7 +164,17 @@ export default function Screen15GrandFinale() {
           )}
 
           {/* Final Monkey Picture Surprise */}
-          {phase === 'final' && (
+          {loadingFinal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 text-white text-xl font-bold"
+            >
+              Loading...
+            </motion.div>
+          )}
+
+          {showFinalImage && (
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}

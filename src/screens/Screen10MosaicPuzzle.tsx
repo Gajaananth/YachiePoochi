@@ -11,7 +11,7 @@ const pieceLayouts = [
   { id: 1, backgroundPosition: 'right top', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '1' },
   { id: 2, backgroundPosition: 'left bottom', backgroundSize: '200% 200%', gridColumn: '1', gridRow: '2' },
   { id: 3, backgroundPosition: 'right bottom', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '2' },
-  { id: 4, backgroundPosition: '50% 85%', backgroundSize: '100% 180%', gridColumn: '1 / span 2', gridRow: '3' }
+  { id: 4, backgroundPosition: 'center bottom', backgroundSize: '100% 200%', gridColumn: '1 / span 2', gridRow: '3' }
 ];
 
 // A 5-piece puzzle with four square sections and one wider rectangle section

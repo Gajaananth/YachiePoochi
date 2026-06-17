@@ -23,9 +23,16 @@ import { AnimatedBackground } from './components/AnimatedBackground';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState(1);
+  const [audioTrack, setAudioTrack] = useState('/audio/happy_birthday_from_the_blobs_to_you.mp3');
+  const [audioLoop, setAudioLoop] = useState(true);
 
   const nextScreen = () => {
     setCurrentScreen((prev) => Math.min(prev + 1, 15));
+  };
+
+  const handleStartFinalSong = () => {
+    setAudioTrack('/audio/lastmonkeysuprice.mp3');
+    setAudioLoop(false);
   };
 
   const renderScreen = () => {
@@ -44,14 +51,14 @@ export default function App() {
       case 12: return <Screen12TimeMachine onContinue={nextScreen} />;
       case 13: return <Screen13SystemFailure onRecover={nextScreen} />;
       case 14: return <Screen14SecretVault onComplete={nextScreen} />;
-      case 15: return <Screen15GrandFinale />;
+      case 15: return <Screen15GrandFinale onStartFinalSong={handleStartFinalSong} />;
       default: return null;
     }
   };
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-[#0B001A] via-[#05000D] to-[#000000] text-white relative overflow-x-hidden flex flex-col">
-      <AudioController />
+      <AudioController track={audioTrack} loop={audioLoop} />
 
       {/* Premium Global Components */}
       <div className="fixed inset-0 pointer-events-none z-50">

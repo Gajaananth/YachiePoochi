@@ -1,25 +1,51 @@
 import { useState, useEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
-export function AudioController() {
+interface AudioControllerProps {
+  track: string;
+  loop?: boolean;
+}
+
+export function AudioController({ track, loop = true }: AudioControllerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audio] = useState(() => new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')); // Placeholder
+  const [audio] = useState(() => new Audio(track));
 
   useEffect(() => {
-    audio.loop = true;
+    audio.preload = 'auto';
+    audio.loop = loop;
     audio.volume = 0.3;
+    audio.src = track;
+    audio.load();
+    audio.play().then(() => setIsPlaying(true)).catch(() => {
+      // Autoplay may be blocked until user interaction.
+      setIsPlaying(false);
+    });
     return () => {
       audio.pause();
     };
-  }, [audio]);
+  }, [audio, loop, track]);
+
+  useEffect(() => {
+    if (audio.src !== track) {
+      audio.pause();
+      audio.src = track;
+      audio.load();
+      audio.play().then(() => setIsPlaying(true)).catch(() => {
+        setIsPlaying(false);
+      });
+    }
+  }, [track, audio]);
 
   const togglePlay = () => {
     if (isPlaying) {
       audio.pause();
+      setIsPlaying(false);
     } else {
-      audio.play().catch(e => console.log("Audio play failed", e));
+      audio.play().then(() => setIsPlaying(true)).catch(e => {
+        console.log('Audio play failed', e);
+        setIsPlaying(false);
+      });
     }
-    setIsPlaying(!isPlaying);
   };
 
   return (
