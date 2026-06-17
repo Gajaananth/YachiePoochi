@@ -7,17 +7,16 @@ interface Props {
 }
 
 const pieceLayouts = [
-  { id: 0, backgroundPosition: 'left top', backgroundSize: '200% 200%', gridColumn: '1', gridRow: '1' },
-  { id: 1, backgroundPosition: 'right top', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '1' },
-  { id: 2, backgroundPosition: 'left bottom', backgroundSize: '200% 200%', gridColumn: '1', gridRow: '2' },
-  { id: 3, backgroundPosition: 'right bottom', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '2' },
-  { id: 4, backgroundPosition: 'center bottom', backgroundSize: '100% 200%', gridColumn: '1 / span 2', gridRow: '3' }
+  { backgroundPosition: 'left top', backgroundSize: '200% 200%', gridColumn: '1', gridRow: '1' },
+  { backgroundPosition: 'right top', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '1' },
+  { backgroundPosition: 'left bottom', backgroundSize: '200% 200%', gridColumn: '1', gridRow: '2' },
+  { backgroundPosition: 'right bottom', backgroundSize: '200% 200%', gridColumn: '2', gridRow: '2' }
 ];
 
-// A 5-piece puzzle with four square sections and one wider rectangle section
+// A 4-piece puzzle split into four equal square quadrants
 export default function Screen10MosaicPuzzle({ onComplete }: Props) {
   const [photo] = useState(() => getRandomPhoto());
-  const [pieces, setPieces] = useState([0, 1, 2, 3, 4]);
+  const [pieces, setPieces] = useState([0, 1, 2, 3]);
   const [solved, setSolved] = useState(false);
 
   useEffect(() => {
@@ -56,7 +55,7 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
         }}
       >
         {!solved ? (
-          <Reorder.Group axis="y" values={pieces} onReorder={setPieces} className="w-full h-full grid grid-cols-2 gap-2" style={{ gridTemplateRows: '1fr 1fr 0.9fr' }}>
+          <Reorder.Group axis="y" values={pieces} onReorder={setPieces} className="w-full h-full grid grid-cols-2 gap-2" style={{ gridTemplateRows: '1fr 1fr' }}>
             {pieces.map((piece) => {
               const layout = pieceLayouts[piece];
               return (
