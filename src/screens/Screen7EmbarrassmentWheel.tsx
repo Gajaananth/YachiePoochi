@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { getRandomPhoto } from '../data/photos';
 
+import starPic from '../assets/star.jpg';
+
 interface Props {
   onComplete: () => void;
 }
@@ -37,7 +39,9 @@ export default function Screen7EmbarrassmentWheel({ onComplete }: Props) {
 
     const index = Math.floor(((targetRotation % 360) / 360) * rewards.length);
     const selectedReward = rewards[index] || rewards[0];
-    const selectedPhoto = getRandomPhoto();
+    
+    // Use the star pic for Birthday Star, else random photo
+    const selectedPhoto = selectedReward.includes("Birthday Star") ? starPic : getRandomPhoto();
     
     setResult(selectedReward);
     setPhoto(selectedPhoto);

@@ -8,6 +8,9 @@ interface Props {
 const decoys = [
   { id: 'decoy1', src: new URL('../../find_the_real_Yachie/b15a123cf4c902f0084fad278baad508.jpg', import.meta.url).href, type: 'decoy' },
   { id: 'decoy2', src: new URL('../../find_the_real_Yachie/images (3).jpg', import.meta.url).href, type: 'decoy' },
+  { id: 'decoy3', src: new URL('../../find_the_real_Yachie/images (4).jpg', import.meta.url).href, type: 'decoy' },
+  { id: 'decoy4', src: new URL('../../find_the_real_Yachie/images (5).jpg', import.meta.url).href, type: 'decoy' },
+  { id: 'decoy5', src: new URL('../../find_the_real_Yachie/images (6).jpg', import.meta.url).href, type: 'decoy' },
 ];
 
 const realYachie = {

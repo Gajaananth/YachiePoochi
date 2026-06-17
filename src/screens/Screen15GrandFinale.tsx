@@ -8,15 +8,15 @@ export default function Screen15GrandFinale() {
   const [phase, setPhase] = useState<'fade' | 'text1' | 'text2' | 'photos' | 'lights' | 'fireworks' | 'message' | 'final'>('fade');
 
   useEffect(() => {
+    // We stop at 'message'. 'final' is triggered by button click!
     const phases = [
       { phase: 'fade', delay: 500 },
       { phase: 'text1', delay: 2000 },
-      { phase: 'text2', delay: 3000 },
-      { phase: 'photos', delay: 3500 },
-      { phase: 'lights', delay: 4500 },
-      { phase: 'fireworks', delay: 5000 },
-      { phase: 'message', delay: 5500 },
-      { phase: 'final', delay: 7000 }
+      { phase: 'text2', delay: 3500 },
+      { phase: 'photos', delay: 4500 },
+      { phase: 'lights', delay: 5500 },
+      { phase: 'fireworks', delay: 6500 },
+      { phase: 'message', delay: 8000 }
     ] as const;
 
     const timers = phases.map(({ phase: p, delay }) =>
@@ -27,7 +27,7 @@ export default function Screen15GrandFinale() {
   }, []);
 
   useEffect(() => {
-    if (phase === 'fireworks') {
+    if (phase === 'fireworks' || phase === 'message' || phase === 'final') {
       const duration = 3000;
       const end = Date.now() + duration;
 
@@ -51,13 +51,12 @@ export default function Screen15GrandFinale() {
           requestAnimationFrame(frame);
         }
       };
-      frame();
+      if (phase === 'fireworks') frame();
     }
   }, [phase]);
 
   return (
     <div className="w-full flex-grow flex flex-col items-center justify-center p-4 relative bg-black">
-      {/* Phase: Fade to black */}
       {phase !== 'fade' && (
         <>
           {/* Phase: First message */}
@@ -69,7 +68,7 @@ export default function Screen15GrandFinale() {
               className="absolute inset-0 flex items-center justify-center z-20"
             >
               <motion.p
-                animate={{ scale: [1, 1.1, 1] }}
+                animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="text-4xl md:text-6xl font-light text-center text-gray-300 max-w-3xl px-4"
               >
@@ -78,8 +77,8 @@ export default function Screen15GrandFinale() {
             </motion.div>
           )}
 
-          {/* Phase: Second message */}
-          {(phase === 'text2' || phase === 'photos' || phase === 'lights' || phase === 'fireworks' || phase === 'message' || phase === 'final') && (
+          {/* Phase: Second message (Hides when message appears to clean up screen) */}
+          {(phase === 'text2' || phase === 'photos' || phase === 'lights' || phase === 'fireworks') && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -96,8 +95,8 @@ export default function Screen15GrandFinale() {
             </motion.div>
           )}
 
-          {/* Photo Collage Background */}
-          {(phase === 'photos' || phase === 'lights' || phase === 'fireworks' || phase === 'message' || phase === 'final') && (
+          {/* Photo Collage Background (Fades out when message appears) */}
+          {(phase === 'photos' || phase === 'lights' || phase === 'fireworks') && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: phase === 'photos' ? 0.3 : 0.5 }}
@@ -114,81 +113,49 @@ export default function Screen15GrandFinale() {
                   <img src={photo} alt="" className="w-full h-full object-cover" />
                 </motion.div>
               ))}
-              <div className="absolute inset-0 bg-black/40" />
+              <div className="absolute inset-0 bg-black/60" />
             </motion.div>
           )}
 
-          {/* Floating Lights */}
-          {(phase === 'lights' || phase === 'fireworks' || phase === 'message' || phase === 'final') && (
-            <div className="absolute inset-0 z-10 pointer-events-none">
-              {Array.from({ length: 20 }).map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 rounded-full bg-pink-400 shadow-[0_0_10px_#ec4899]"
-                  initial={{
-                    x: Math.random() * window.innerWidth,
-                    y: window.innerHeight,
-                    opacity: 0
-                  }}
-                  animate={{
-                    y: -100,
-                    opacity: [0, 1, 0]
-                  }}
-                  transition={{
-                    duration: 3 + Math.random() * 2,
-                    delay: i * 0.15,
-                    repeat: Infinity
-                  }}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* Main Message */}
+          {/* Main Happy Birthday Message */}
           {(phase === 'message' || phase === 'final') && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="absolute inset-0 flex items-center justify-center z-30"
+              className="absolute inset-0 flex flex-col items-center justify-center z-30"
             >
               <div className="text-center">
-                <motion.h1
-                  className="text-5xl md:text-7xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 drop-shadow-lg"
-                >
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 drop-shadow-lg">
                   🎂 HAPPY BIRTHDAY YACHIE 🎂
-                </motion.h1>
+                </h1>
               </div>
+
+              {/* Show the button ONLY in 'message' phase, so it disappears after clicked */}
+              {phase === 'message' && (
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 2 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setPhase('final')}
+                  className="mt-12 px-10 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full font-bold text-lg text-white shadow-xl shadow-pink-500/30 hover:shadow-2xl transition-all cursor-pointer"
+                >
+                  One Last Surprise
+                </motion.button>
+              )}
             </motion.div>
           )}
 
-          {/* Final Button */}
-          {phase === 'final' && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2 }}
-              className="absolute bottom-12 z-40"
-            >
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setPhase('final')}
-                className="px-10 py-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full font-bold text-lg text-white shadow-xl shadow-pink-500/30 hover:shadow-2xl transition-all"
-              >
-                One Last Surprise
-              </motion.button>
-            </motion.div>
-          )}
-
-          {/* Final Monkey Picture Message */}
+          {/* Final Monkey Picture Surprise */}
           {phase === 'final' && (
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 3, type: 'spring' }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 text-center"
+              transition={{ type: 'spring' }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-16 z-50 text-center"
             >
-              <img src={monkeyPic} alt="Happy Birthday" className="max-w-[80vw] max-h-[60vh] object-contain rounded-2xl shadow-2xl border-4 border-pink-500 mb-6" />
+              <img src={monkeyPic} alt="Happy Birthday" className="max-w-[90vw] max-h-[50vh] object-contain rounded-2xl shadow-2xl border-4 border-pink-500" />
             </motion.div>
           )}
         </>

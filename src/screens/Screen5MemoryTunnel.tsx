@@ -52,7 +52,7 @@ export default function Screen5MemoryTunnel({ onComplete }: Props) {
       {/* Scrollable Container */}
       <div
         ref={containerRef}
-        className="w-full h-full overflow-x-auto overflow-y-hidden flex items-center px-[10vw] md:px-[15vw] lg:px-[20vw] no-scrollbar snap-x snap-mandatory pt-16 md:pt-12"
+        className="w-full h-full overflow-x-auto overflow-y-hidden flex items-center px-[10vw] md:px-[15vw] lg:px-[20vw] no-scrollbar snap-x snap-mandatory pt-32 md:pt-28"
       >
         <div className="flex gap-6 md:gap-12 lg:gap-16 items-center pr-[10vw] md:pr-[15vw] lg:pr-[20vw]">
           {tunnelPhotos.map((photo, idx) => {
