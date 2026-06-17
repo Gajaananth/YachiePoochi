@@ -21,7 +21,7 @@ export default function Screen10MosaicPuzzle({ onComplete }: Props) {
 
   useEffect(() => {
     // Shuffle pieces on mount
-    setPieces([0, 1, 2, 3, 4].sort(() => Math.random() - 0.5));
+    setPieces([0, 1, 2, 3].sort(() => Math.random() - 0.5));
   }, []);
 
   useEffect(() => {
