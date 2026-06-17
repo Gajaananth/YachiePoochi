@@ -12,20 +12,21 @@ interface Balloon {
 
 const balloonColors = ['#9D4EDD', '#FF0A54', '#00F5D4', '#FFB703'];
 
-function generateRandomBalloon(): Balloon {
+function generateRandomBalloon(fromLeft: boolean): Balloon {
   return {
     id: `balloon-${Math.random().toString(36).substr(2, 9)}`,
-    x: Math.random() * 100, // percentage-based, always inside viewport
+    // Spawns balloons in the left 15% or right 15% of the screen
+    x: fromLeft ? Math.random() * 15 : 85 + Math.random() * 15,
     y: 100 + Math.random() * 20, // start below viewport
     color: balloonColors[Math.floor(Math.random() * balloonColors.length)],
-    size: 10 + Math.random() * 25,
-    duration: 14 + Math.random() * 16,
-    delay: Math.random() * 8,
+    size: 15 + Math.random() * 30, // slightly larger balloons
+    duration: 12 + Math.random() * 10,
+    delay: Math.random() * 5,
   };
 }
 
 const generateBalloons = (count: number): Balloon[] => {
-  return Array.from({ length: count }, () => generateRandomBalloon());
+  return Array.from({ length: count }, (_, i) => generateRandomBalloon(i % 2 === 0));
 };
 
 export function FloatingBalloons() {
