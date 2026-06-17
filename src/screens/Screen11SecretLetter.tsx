@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import serupadiPic from '../assets/serupadi.jpg';
 
 interface Props {
   onContinue: () => void;
@@ -23,9 +24,6 @@ const letterLines = [
   "",
   "May this new year of your life bring wonderful opportunities,",
   "meaningful memories, and reasons to be proud of yourself.",
-  "",
-  "And most importantly...",
-  "Please try not to collect any more serupadis this year.",
   "",
   "Stay strong.",
   "Keep smiling.",
@@ -66,46 +64,71 @@ export default function Screen11SecretLetter({ onContinue }: Props) {
       {/* Premium Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0B001A] via-[#05000D] to-[#000000]" />
 
-      {/* Letter Container */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 w-full max-w-2xl rounded-2xl md:rounded-3xl overflow-hidden"
-        style={{
-          background: 'rgba(255, 255, 255, 0.05)',
-          border: '1px solid rgba(255, 255, 255, 0.15)',
-          backdropFilter: 'blur(20px)',
-        }}
-      >
-        <div className="p-6 sm:p-8 md:p-10 lg:p-12 min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center">
-          {/* Letter Text */}
-          <div className="font-light text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed md:leading-8">
-            {letterLines.slice(0, currentLine).map((line, idx) => (
-              <p key={idx} className="min-h-[1.5em] md:min-h-[2em] mb-2 md:mb-3">
-                {line}
-              </p>
-            ))}
-            {currentLine < letterLines.length && (
-              <p className="min-h-[1.5em] md:min-h-[2em]">
-                {letterLines[currentLine].substring(0, visibleChars)}
-                <motion.span
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ repeat: Infinity, duration: 0.8 }}
-                  className="text-[#9D4EDD]"
-                >
-                  |
-                </motion.span>
-              </p>
-            )}
+      {/* Content Container */}
+      <div className="w-full flex flex-col lg:flex-row gap-8 items-center justify-center z-10">
+        
+        {/* Letter Container */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative w-full max-w-xl rounded-2xl md:rounded-3xl overflow-hidden"
+          style={{
+            background: 'rgba(255, 255, 255, 0.05)',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            backdropFilter: 'blur(20px)',
+          }}
+        >
+          <div className="p-6 sm:p-8 md:p-10 min-h-[50vh] flex flex-col justify-center">
+            {/* Letter Text */}
+            <div className="font-light text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed md:leading-8">
+              {letterLines.slice(0, currentLine).map((line, idx) => (
+                <p key={idx} className="min-h-[1.5em] md:min-h-[2em] mb-2 md:mb-3">
+                  {line}
+                </p>
+              ))}
+              {currentLine < letterLines.length && (
+                <p className="min-h-[1.5em] md:min-h-[2em]">
+                  {letterLines[currentLine].substring(0, visibleChars)}
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ repeat: Infinity, duration: 0.8 }}
+                    className="text-[#9D4EDD]"
+                  >
+                    |
+                  </motion.span>
+                </p>
+              )}
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+
+        {/* Bonus Serupadi Pop-Zoom (only visible after letter finishes) */}
+        {finished && (
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: [0.5, 1.1, 1], opacity: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut", delay: 1 }}
+            className="flex flex-col items-center justify-center max-w-sm mt-4 lg:mt-0"
+          >
+            <div className="rounded-xl overflow-hidden shadow-2xl border-2 border-pink-500 mb-4 w-64 h-64">
+              <img src={serupadiPic} alt="Surprise" className="w-full h-full object-cover" />
+            </div>
+            <motion.p
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="text-xl md:text-2xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-[#FF0A54]"
+            >
+              PLEASE TRY NOT TO COLLECT ANY MORE SERUPADIS THIS YEAR!
+            </motion.p>
+          </motion.div>
+        )}
+      </div>
 
       {/* Continue Button */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: finished ? 1 : 0 }}
-        transition={{ delay: finished ? 0.5 : 0 }}
+        transition={{ delay: finished ? 2.5 : 0 }}
         className="mt-8 md:mt-12 z-10"
       >
         <motion.button

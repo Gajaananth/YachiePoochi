@@ -65,19 +65,24 @@ export default function Screen5MemoryTunnel({ onComplete }: Props) {
                 viewport={{ margin: "-100px" }}
                 whileHover={{ scale: 1.05 }}
                 // Reduced width sizes below
-                className="relative snap-center shrink-0 w-[55vw] sm:w-[45vw] md:w-[30vw] lg:w-[25vw] max-w-sm aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden flex flex-col group"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                }}
+                className="relative snap-center shrink-0 w-[65vw] sm:w-[45vw] md:w-[30vw] lg:w-[25vw] max-w-sm flex flex-col group"
               >
-                <div className="w-full h-full rounded-2xl md:rounded-3xl overflow-hidden relative">
+                <div 
+                  className="w-full aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    backdropFilter: 'blur(20px)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                  }}
+                >
                   <img src={photo} alt="" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4 md:p-6">
-                    <p className="text-sm md:text-base lg:text-lg font-semibold text-white leading-relaxed text-center w-full">{caption}</p>
-                  </div>
+                </div>
+                {/* Caption stays below image, perfectly visible on mobile */}
+                <div className="mt-4 px-2 min-h-[80px] flex items-center justify-center">
+                  <p className="text-sm md:text-base lg:text-lg font-semibold text-gray-200 leading-relaxed text-center w-full">
+                    {caption}
+                  </p>
                 </div>
               </motion.div>
             );
